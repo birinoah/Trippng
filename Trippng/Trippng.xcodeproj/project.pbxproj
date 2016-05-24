@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE0B145A1CDBB4AD007E5D8F /* AppleMapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0B14591CDBB4AD007E5D8F /* AppleMapsViewController.swift */; };
+		CE0B145C1CDBB779007E5D8F /* GooglePlacesSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0B145B1CDBB779007E5D8F /* GooglePlacesSearcher.swift */; };
+		CE2DFCBF1CE24FBC006877B9 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2DFCBE1CE24FBC006877B9 /* Place.swift */; };
+		CE2DFCC11CE258CC006877B9 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE2DFCC01CE258CC006877B9 /* MapKit.framework */; };
 		CE81DCF71CD829D20065328D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE81DCF61CD829D20065328D /* AppDelegate.swift */; };
 		CE81DCF91CD829D20065328D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE81DCF81CD829D20065328D /* ViewController.swift */; };
 		CE81DCFC1CD829D20065328D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE81DCFA1CD829D20065328D /* Main.storyboard */; };
@@ -14,6 +18,9 @@
 		CE81DD011CD829D20065328D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE81DCFF1CD829D20065328D /* LaunchScreen.storyboard */; };
 		CE81DD0C1CD829D20065328D /* TrippngTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE81DD0B1CD829D20065328D /* TrippngTests.swift */; };
 		CE81DD171CD829D20065328D /* TrippngUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE81DD161CD829D20065328D /* TrippngUITests.swift */; };
+		CE81DD251CD82E8E0065328D /* YelpAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE81DD241CD82E8E0065328D /* YelpAPI.swift */; };
+		CE9D9C731CE2687F006F2B92 /* MapSearchTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9D9C721CE2687F006F2B92 /* MapSearchTableVC.swift */; };
+		E21C825C551FFAF96459FDE5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87367E733AA0BD0B6890ED74 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +41,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0937A7D396B401D11177D548 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		6AD7C5C34DF46F4903F874D8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		87367E733AA0BD0B6890ED74 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE0B14591CDBB4AD007E5D8F /* AppleMapsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleMapsViewController.swift; sourceTree = "<group>"; };
+		CE0B145B1CDBB779007E5D8F /* GooglePlacesSearcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlacesSearcher.swift; sourceTree = "<group>"; };
+		CE2DFCBE1CE24FBC006877B9 /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		CE2DFCC01CE258CC006877B9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		CE81DCF31CD829D20065328D /* Trippng.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trippng.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE81DCF61CD829D20065328D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE81DCF81CD829D20065328D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +61,8 @@
 		CE81DD121CD829D20065328D /* TrippngUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrippngUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE81DD161CD829D20065328D /* TrippngUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrippngUITests.swift; sourceTree = "<group>"; };
 		CE81DD181CD829D20065328D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE81DD241CD82E8E0065328D /* YelpAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpAPI.swift; sourceTree = "<group>"; };
+		CE9D9C721CE2687F006F2B92 /* MapSearchTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapSearchTableVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +70,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE2DFCC11CE258CC006877B9 /* MapKit.framework in Frameworks */,
+				E21C825C551FFAF96459FDE5 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +92,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BBE62C6775A0B35C02B0F8F4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0937A7D396B401D11177D548 /* Pods.debug.xcconfig */,
+				6AD7C5C34DF46F4903F874D8 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		CE81DCEA1CD829D20065328D = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +108,8 @@
 				CE81DD0A1CD829D20065328D /* TrippngTests */,
 				CE81DD151CD829D20065328D /* TrippngUITests */,
 				CE81DCF41CD829D20065328D /* Products */,
+				BBE62C6775A0B35C02B0F8F4 /* Pods */,
+				DB45AA2EFBDF208FE21690D7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,6 +128,11 @@
 			children = (
 				CE81DCF61CD829D20065328D /* AppDelegate.swift */,
 				CE81DCF81CD829D20065328D /* ViewController.swift */,
+				CE0B14591CDBB4AD007E5D8F /* AppleMapsViewController.swift */,
+				CE9D9C721CE2687F006F2B92 /* MapSearchTableVC.swift */,
+				CE0B145B1CDBB779007E5D8F /* GooglePlacesSearcher.swift */,
+				CE2DFCBE1CE24FBC006877B9 /* Place.swift */,
+				CE81DD241CD82E8E0065328D /* YelpAPI.swift */,
 				CE81DCFA1CD829D20065328D /* Main.storyboard */,
 				CE81DCFD1CD829D20065328D /* Assets.xcassets */,
 				CE81DCFF1CD829D20065328D /* LaunchScreen.storyboard */,
@@ -125,6 +159,15 @@
 			path = TrippngUITests;
 			sourceTree = "<group>";
 		};
+		DB45AA2EFBDF208FE21690D7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CE2DFCC01CE258CC006877B9 /* MapKit.framework */,
+				87367E733AA0BD0B6890ED74 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +175,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE81DD1B1CD829D20065328D /* Build configuration list for PBXNativeTarget "Trippng" */;
 			buildPhases = (
+				0DECB08BB4478C7F745A4F96 /* Check Pods Manifest.lock */,
 				CE81DCEF1CD829D20065328D /* Sources */,
 				CE81DCF01CD829D20065328D /* Frameworks */,
 				CE81DCF11CD829D20065328D /* Resources */,
+				70B373EE11AEE2384EAE70C0 /* Embed Pods Frameworks */,
+				A1D98E555F7A83D5ADEA1C89 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -194,6 +240,11 @@
 					CE81DCF21CD829D20065328D = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 657WB3VLKU;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					CE81DD061CD829D20065328D = {
 						CreatedOnToolsVersion = 7.3;
@@ -254,13 +305,66 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0DECB08BB4478C7F745A4F96 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		70B373EE11AEE2384EAE70C0 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A1D98E555F7A83D5ADEA1C89 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CE81DCEF1CD829D20065328D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE81DD251CD82E8E0065328D /* YelpAPI.swift in Sources */,
 				CE81DCF91CD829D20065328D /* ViewController.swift in Sources */,
+				CE0B145A1CDBB4AD007E5D8F /* AppleMapsViewController.swift in Sources */,
+				CE2DFCBF1CE24FBC006877B9 /* Place.swift in Sources */,
+				CE9D9C731CE2687F006F2B92 /* MapSearchTableVC.swift in Sources */,
 				CE81DCF71CD829D20065328D /* AppDelegate.swift in Sources */,
+				CE0B145C1CDBB779007E5D8F /* GooglePlacesSearcher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +504,7 @@
 		};
 		CE81DD1C1CD829D20065328D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0937A7D396B401D11177D548 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Trippng/Info.plist;
@@ -411,6 +516,7 @@
 		};
 		CE81DD1D1CD829D20065328D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6AD7C5C34DF46F4903F874D8 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Trippng/Info.plist;
@@ -485,6 +591,7 @@
 				CE81DD1D1CD829D20065328D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CE81DD1E1CD829D20065328D /* Build configuration list for PBXNativeTarget "TrippngTests" */ = {
 			isa = XCConfigurationList;
@@ -493,6 +600,7 @@
 				CE81DD201CD829D20065328D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CE81DD211CD829D20065328D /* Build configuration list for PBXNativeTarget "TrippngUITests" */ = {
 			isa = XCConfigurationList;
@@ -501,6 +609,7 @@
 				CE81DD231CD829D20065328D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
