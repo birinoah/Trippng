@@ -40,7 +40,7 @@ class GooglePlacesSearcher
         var places = [Place]()
         
         if let jsonResult = parsedObject as? NSDictionary {
-            let placesArray: NSArray = jsonResult["predictions"]! as! NSArray
+            let placesArray: NSArray = jsonResult["results"]! as! NSArray
             for index in 0..<placesArray.count {
                 let placesJSON: NSDictionary = placesArray[index]as! NSDictionary
                 

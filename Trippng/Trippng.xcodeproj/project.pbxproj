@@ -11,6 +11,7 @@
 		CE0B145C1CDBB779007E5D8F /* GooglePlacesSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0B145B1CDBB779007E5D8F /* GooglePlacesSearcher.swift */; };
 		CE2DFCBF1CE24FBC006877B9 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2DFCBE1CE24FBC006877B9 /* Place.swift */; };
 		CE2DFCC11CE258CC006877B9 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE2DFCC01CE258CC006877B9 /* MapKit.framework */; };
+		CE5BE6FE1CF473A400E3AB74 /* RouteSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5BE6FD1CF473A400E3AB74 /* RouteSearchVC.swift */; };
 		CE81DCF71CD829D20065328D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE81DCF61CD829D20065328D /* AppDelegate.swift */; };
 		CE81DCF91CD829D20065328D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE81DCF81CD829D20065328D /* ViewController.swift */; };
 		CE81DCFC1CD829D20065328D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE81DCFA1CD829D20065328D /* Main.storyboard */; };
@@ -20,7 +21,7 @@
 		CE81DD171CD829D20065328D /* TrippngUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE81DD161CD829D20065328D /* TrippngUITests.swift */; };
 		CE81DD251CD82E8E0065328D /* YelpAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE81DD241CD82E8E0065328D /* YelpAPI.swift */; };
 		CE9D9C731CE2687F006F2B92 /* MapSearchTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9D9C721CE2687F006F2B92 /* MapSearchTableVC.swift */; };
-		E21C825C551FFAF96459FDE5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87367E733AA0BD0B6890ED74 /* libPods.a */; };
+		E21C825C551FFAF96459FDE5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87367E733AA0BD0B6890ED74 /* libPods.a */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		CE0B145B1CDBB779007E5D8F /* GooglePlacesSearcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlacesSearcher.swift; sourceTree = "<group>"; };
 		CE2DFCBE1CE24FBC006877B9 /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		CE2DFCC01CE258CC006877B9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		CE5BE6FD1CF473A400E3AB74 /* RouteSearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteSearchVC.swift; sourceTree = "<group>"; };
 		CE81DCF31CD829D20065328D /* Trippng.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trippng.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE81DCF61CD829D20065328D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE81DCF81CD829D20065328D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				CE0B14591CDBB4AD007E5D8F /* AppleMapsViewController.swift */,
 				CE9D9C721CE2687F006F2B92 /* MapSearchTableVC.swift */,
 				CE0B145B1CDBB779007E5D8F /* GooglePlacesSearcher.swift */,
+				CE5BE6FD1CF473A400E3AB74 /* RouteSearchVC.swift */,
 				CE2DFCBE1CE24FBC006877B9 /* Place.swift */,
 				CE81DD241CD82E8E0065328D /* YelpAPI.swift */,
 				CE81DCFA1CD829D20065328D /* Main.storyboard */,
@@ -362,6 +365,7 @@
 				CE81DCF91CD829D20065328D /* ViewController.swift in Sources */,
 				CE0B145A1CDBB4AD007E5D8F /* AppleMapsViewController.swift in Sources */,
 				CE2DFCBF1CE24FBC006877B9 /* Place.swift in Sources */,
+				CE5BE6FE1CF473A400E3AB74 /* RouteSearchVC.swift in Sources */,
 				CE9D9C731CE2687F006F2B92 /* MapSearchTableVC.swift in Sources */,
 				CE81DCF71CD829D20065328D /* AppDelegate.swift in Sources */,
 				CE0B145C1CDBB779007E5D8F /* GooglePlacesSearcher.swift in Sources */,
@@ -507,7 +511,9 @@
 			baseConfigurationReference = 0937A7D396B401D11177D548 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Trippng/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = bowdoin.edu.2505.safian.Trippng;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -519,7 +525,9 @@
 			baseConfigurationReference = 6AD7C5C34DF46F4903F874D8 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Trippng/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = bowdoin.edu.2505.safian.Trippng;
 				PRODUCT_NAME = "$(TARGET_NAME)";

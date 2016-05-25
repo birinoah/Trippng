@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MapKit
 
 class Place
 {
@@ -27,8 +28,20 @@ class Place
     }
     
     var name: String?
-    var latitude: Double?
-    var longitude: Double?
+    var latitude: Double
+    var longitude: Double
     var address: String?
     var googleId: String?
+    
+    var title: String? {
+        get {
+            return name
+        }
+    }
+    
+    var subtitle: String? {
+        get {
+            return address
+        }
+    }
 }

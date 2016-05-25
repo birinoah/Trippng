@@ -10,9 +10,11 @@ import UIKit
 import MapKit
 import GoogleMaps
 
-class AppleMapsViewController: UIViewController, MKMapViewDelegate, UISearchBarDelegate, CLLocationManagerDelegate, GMSAutocompleteResultsViewControllerDelegate {
+class AppleMapsViewController: UIViewController, MKMapViewDelegate, UISearchBarDelegate, CLLocationManagerDelegate, GMSAutocompleteResultsViewControllerDelegate, RouteSearchDelegate {
     
     var searchController: UISearchController?
+    
+    @IBOutlet weak var cancelSearchButton: UIButton!
     
     var locationSearchTable: MapSearchTableVC?
     
@@ -20,24 +22,29 @@ class AppleMapsViewController: UIViewController, MKMapViewDelegate, UISearchBarD
     
     var resultsViewController = GMSAutocompleteResultsViewController()
     
+    var routeSearchBarColor = UIColor.orangeColor()
     
     var searchRadiusBiasDegrees: Double = 2
     var searchRadiusBiasMiles: Double = 100
     
+    var isInitial = true
+    
     @IBOutlet weak var mapView: MKMapView!
     
-    func showSearchBar() {
-        if let searchController = searchController {
-            searchController.hidesNavigationBarDuringPresentation = false
-            searchController.searchBar.delegate = self
-            //presentViewController(searchController, animated: true, completion: nil)
-            self.showViewController(searchController, sender: nil)
-        }
+    @IBAction func cancelSearchButtonTapped(sender: UIButton) {
+        setupSearchBar()
+        cancelSearchButton.hidden = true
+        mapView.removeOverlays(mapView.overlays)
+        destination = nil
     }
     
-    //    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-    //         searchBar.resignFirstResponder()
-    //    }
+    func setupSearchBar() {
+        if let searchBar = searchController?.searchBar {
+            searchBar.sizeToFit()
+            searchBar.placeholder = "Enter your destination here"
+            navigationItem.titleView = searchController?.searchBar
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,18 +78,15 @@ class AppleMapsViewController: UIViewController, MKMapViewDelegate, UISearchBarD
         searchController = UISearchController(searchResultsController: resultsViewController)
         searchController?.searchResultsUpdater = resultsViewController
         
-        if let searchBar = searchController?.searchBar {
-            searchBar.sizeToFit()
-            searchBar.placeholder = "Enter your destination here"
-            navigationItem.titleView = searchController?.searchBar
-        }
-        
+        setupSearchBar()
         
         searchController?.hidesNavigationBarDuringPresentation = false
         searchController?.dimsBackgroundDuringPresentation = true
         definesPresentationContext = true
         
-        
+        cancelSearchButton.hidden = true
+//        cancelSearchButton.alpha = 0.5
+        cancelSearchButton.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.5)
         
     }
     
@@ -91,14 +95,13 @@ class AppleMapsViewController: UIViewController, MKMapViewDelegate, UISearchBarD
         
         zoomInOn(place.coordinate, animated: true)
         
+        mapView.removeOverlays(mapView.overlays)
+        
         mapView.removeAnnotations(mapView.annotations)
         
         mapView.addAnnotation(place)
         
-        // Do something with the selected place.
-        print("Place name: ", place.name)
-        print("Place address: ", place.formattedAddress)
-        print("Place attributions: ", place.attributions)
+        mapView.selectAnnotation(place, animated: true)
     }
     
     static let annotationIdentifier = "annot"
@@ -135,12 +138,24 @@ class AppleMapsViewController: UIViewController, MKMapViewDelegate, UISearchBarD
             // set canShowCallout to true or false and build aView’s callout accessory views here
         }
         view.annotation = annotation
+        //        self.mapView.selectAnnotation(annotation, animated: true)
+        
+        //        if (self.mapView.annotationsInMapRect(mapView.visibleMapRect).contains(annotation)) {
+        //            self.mapView.selectAnnotation(annotation, animated: true)
+        //        }
         // maybe load up accessory views and/or title/subtitle here
         // or reset them and wait until mapView(didSelectAnnotationView:) to load actual data
         return view
     }
     
-    var route: MKPolyline?
+    var route: MKRoute?
+    
+    var destination: CLLocationCoordinate2D?
+    
+    func newRectScaledBy(scale: Double, orig: MKMapRect) -> MKMapRect {
+        let newRect = MKMapRect(origin: MKMapPoint(x: orig.origin.x - (scale - 1.0)/2.0 * orig.size.width, y: orig.origin.y - (scale - 1.0)/2.0 * orig.size.height), size: MKMapSize(width: orig.size.width * scale, height: orig.size.height * scale))
+        return newRect
+    }
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
@@ -148,6 +163,7 @@ class AppleMapsViewController: UIViewController, MKMapViewDelegate, UISearchBarD
         
         if let currentCoordinate = locationManager.location?.coordinate {
             if let destinationCoordinate = view.annotation?.coordinate {
+                destination = destinationCoordinate
                 
                 let request = MKDirectionsRequest()
                 request.source = MKMapItem(placemark: MKPlacemark(coordinate: currentCoordinate, addressDictionary: nil))
@@ -160,17 +176,120 @@ class AppleMapsViewController: UIViewController, MKMapViewDelegate, UISearchBarD
                 directions.calculateDirectionsWithCompletionHandler { [unowned self] response, error in
                     guard let unwrappedResponse = response else { return }
                     
-                    self.route = unwrappedResponse.routes[0].polyline
-                    self.mapView.addOverlay(self.route!)
+                    self.route = unwrappedResponse.routes[0]
+                    self.mapView.addOverlay(self.route!.polyline)
                     
-                    let boundingRect = self.route!.boundingMapRect
+                    let boundingRect = self.route!.polyline.boundingMapRect
                     
                     let scale = 2.0
                     
-                    let newRect = MKMapRect(origin: MKMapPoint(x: boundingRect.origin.x - (scale - 1.0)/2.0 * boundingRect.size.width, y: boundingRect.origin.y - (scale - 1.0)/2.0 * boundingRect.size.height), size: MKMapSize(width: boundingRect.size.width * scale, height: boundingRect.size.height * scale))
+                    //                    let newRect = MKMapRect(origin: MKMapPoint(x: boundingRect.origin.x - (scale - 1.0)/2.0 * boundingRect.size.width, y: boundingRect.origin.y - (scale - 1.0)/2.0 * boundingRect.size.height), size: MKMapSize(width: boundingRect.size.width * scale, height: boundingRect.size.height * scale))
+                    
+                    let newRect = self.newRectScaledBy(scale, orig: boundingRect)
+                    
                     self.mapView.setVisibleMapRect(newRect, animated: true)
-//                    self.mapView.deselectAnnotation(view.annotation, animated: true)
+                    self.mapView.deselectAnnotation(view.annotation, animated: true)
+                    
+                    let button = UIButton(type: .Custom)
+                    button.setTitle("Click here to search along route", forState: .Normal)
+                    button.setTitleColor(UIColor.blackColor(), forState: .Normal)
+                    button.addTarget(self, action: "searchAlongRoute:", forControlEvents: .TouchUpInside)
+                    
+                    
+                    self.navigationItem.titleView = button
+                    
+                    self.cancelSearchButton.hidden = false
+                    
+                    //                    if let searchBar = self.searchController?.searchBar {
+                    //                        searchBar.placeholder = "Search along your route!"
+                    //                        searchBar.backgroundColor = self.routeSearchBarColor
+                    //                        searchBar.autoresizingMask = UIViewAutoresizing.FlexibleWidth
+                    //                        searchBar.superview?.backgroundColor = self.routeSearchBarColor
+                    //                    }
                 }
+            }
+        }
+    }
+    
+    static let routeVCIdentifier = "RouteVC"
+    
+    func searchAlongRoute(sender: UIButton) {
+        if let searchAlongRouteVC = storyboard?.instantiateViewControllerWithIdentifier(AppleMapsViewController.routeVCIdentifier) as? RouteSearchVC {
+            
+            searchAlongRouteVC.route = self.route
+            
+            searchAlongRouteVC.delegate = self
+            
+            self.navigationController?.pushViewController(searchAlongRouteVC, animated: true)
+            
+            //            self.presentViewController(searchAlongRouteVC, animated: true, completion: nil)
+        }
+        
+    }
+    
+    func routeSearchDidReturnWithResult(place: Place) {
+        if let currentCoordinate = locationManager.location?.coordinate {
+            let request1 = MKDirectionsRequest()
+            request1.source = MKMapItem(placemark: MKPlacemark(coordinate: currentCoordinate, addressDictionary: nil))
+            request1.destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude) , addressDictionary: nil))
+            request1.requestsAlternateRoutes = false
+            request1.transportType = .Automobile
+            
+            
+            
+            let directions1 = MKDirections(request: request1)
+            
+            directions1.calculateDirectionsWithCompletionHandler { [unowned self] response, error in
+                guard let unwrappedResponse = response else { return }
+                
+                self.route = unwrappedResponse.routes[0]
+                
+                let request2 = MKDirectionsRequest()
+                
+                request1.source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude), addressDictionary: nil))
+                
+                request1.destination = MKMapItem(placemark: MKPlacemark(coordinate: self.destination!, addressDictionary: nil))
+                
+                let directions2 = MKDirections(request: request1)
+                
+                directions2.calculateDirectionsWithCompletionHandler { [unowned self] response, error in
+                    guard let unwrappedResponse = response else { return }
+                    
+                    let route2 = unwrappedResponse.routes[0]
+                    
+                    //                let pointCount = self.route!.polyline.pointCount + route2.polyline.pointCount
+                    //
+                    //                let coordinateArray = UnsafeMutablePointer<CLLocationCoordinate2D>.alloc(pointCount)
+                    //
+                    //                route.polyline.getCoordinates(coordinateArray, range: NSMakeRange(0, pointCount-1))
+                    
+                    self.mapView.addOverlay(self.route!.polyline)
+                    self.mapView.addOverlay(route2.polyline)
+                    
+                    let boundingRect1 = self.route!.polyline.boundingMapRect
+                    let boundingRect2 = route2.polyline.boundingMapRect
+                    let xMin = min(boundingRect1.origin.x, boundingRect2.origin.x)
+                    let yMin = min(boundingRect1.origin.y, boundingRect2.origin.y)
+                    let xMax = max(boundingRect1.origin.x + boundingRect1.size.width, boundingRect2.origin.x + boundingRect2.size.width)
+                    let yMax = max(boundingRect1.origin.y + boundingRect1.size.height, boundingRect2.origin.y + boundingRect2.size.height)
+                    
+                    print("\(xMin),\(yMin) \(xMax),\(yMax)")
+                    
+                    let scale = 1.2
+                    let newRect1 = MKMapRect(origin: MKMapPoint(x: xMin, y: yMin), size: MKMapSize(width: xMax - xMin, height: yMax - yMin))
+                    //                let newRect2 = MKMapRect(origin: MKMapPoint(x: xMin - (scale - 1.0)/2.0 * (xMax - xMin), y: yMin - (scale - 1.0)/2.0 * (yMax - yMin)), size: MKMapSize(width: (xMax - xMin) * scale, height: (yMax-yMin) * scale))
+                    
+                    let newRect2 = self.newRectScaledBy(scale, orig: newRect1)
+                    self.mapView.setVisibleMapRect(newRect2, animated: true)
+                    
+                    let annotation = MKPointAnnotation()
+                    annotation.title = place.name
+                    annotation.subtitle = place.address
+                    annotation.coordinate = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
+                    
+                    self.mapView.addAnnotation(annotation)
+                }
+                
             }
         }
     }
@@ -184,14 +303,14 @@ class AppleMapsViewController: UIViewController, MKMapViewDelegate, UISearchBarD
         return MKPolygonRenderer()
     }
     
-//    func mapView(mapView: MKMapView, didAddOverlayRenderers renderers: [MKOverlayRenderer]) {
-//        let renderer = renderers[0]
-//        let l = renderer.overlay.coordinate
-//        let scale = 1.1
-//        let span = MKCoordinateSpan(latitudeDelta: currentSpan.latitudeDelta * scale, longitudeDelta: currentSpan.longitudeDelta * scale)
-//        let region = MKCoordinateRegion(center: mapView.region.center, span: span)
-//        mapView.setRegion(region, animated: true)
-//    }
+    //    func mapView(mapView: MKMapView, didAddOverlayRenderers renderers: [MKOverlayRenderer]) {
+    //        let renderer = renderers[0]
+    //        let l = renderer.overlay.coordinate
+    //        let scale = 1.1
+    //        let span = MKCoordinateSpan(latitudeDelta: currentSpan.latitudeDelta * scale, longitudeDelta: currentSpan.longitudeDelta * scale)
+    //        let region = MKCoordinateRegion(center: mapView.region.center, span: span)
+    //        mapView.setRegion(region, animated: true)
+    //    }
     
     func resultsController(resultsController: GMSAutocompleteResultsViewController,
                            didFailAutocompleteWithError error: NSError){
@@ -225,9 +344,11 @@ class AppleMapsViewController: UIViewController, MKMapViewDelegate, UISearchBarD
     }
     
     override func viewDidAppear(animated: Bool) {
-        
-        if let userLoc = locationManager.location {
-            zoomInOn(userLoc.coordinate, animated: false)
+        if isInitial{
+            if let userLoc = locationManager.location {
+                zoomInOn(userLoc.coordinate, animated: false)
+            }
+            isInitial = false
         }
         //        zoomInOn(mapView.userLocation.coordinate)
         

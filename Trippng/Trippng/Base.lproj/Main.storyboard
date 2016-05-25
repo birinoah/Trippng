@@ -1,27 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="22j-Ss-K9T">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Trippng" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
         <!--Apple Maps View Controller-->
         <scene sceneID="OR8-cy-zGk">
             <objects>
@@ -37,6 +20,14 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QYf-Ye-vdU">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AzF-iS-xob">
+                                <rect key="frame" x="0.0" y="560" width="600" height="40"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancelSearchButtonTapped:" destination="nYs-Ap-LuO" eventType="touchUpInside" id="CmX-Qp-Ar8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -44,16 +35,55 @@
                             <constraint firstItem="bH3-G6-ASg" firstAttribute="top" secondItem="QYf-Ye-vdU" secondAttribute="bottom" id="DlQ-9R-ls7"/>
                             <constraint firstAttribute="trailing" secondItem="QYf-Ye-vdU" secondAttribute="trailing" id="ES9-K4-9rt"/>
                             <constraint firstItem="QYf-Ye-vdU" firstAttribute="top" secondItem="hoN-Wr-f6w" secondAttribute="bottom" id="NQs-eP-Y01"/>
+                            <constraint firstItem="AzF-iS-xob" firstAttribute="leading" secondItem="u8H-Nx-DiQ" secondAttribute="leadingMargin" constant="-20" id="YfA-ov-UZ0"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="AzF-iS-xob" secondAttribute="trailing" constant="-20" id="dYg-x5-ytN"/>
+                            <constraint firstItem="bH3-G6-ASg" firstAttribute="top" secondItem="AzF-iS-xob" secondAttribute="bottom" id="h0s-JL-u9z"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="13V-rs-Bjl"/>
                     <connections>
+                        <outlet property="cancelSearchButton" destination="AzF-iS-xob" id="Qsa-sd-L7g"/>
                         <outlet property="mapView" destination="QYf-Ye-vdU" id="bIb-SA-r6d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KxF-xM-yjt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1040" y="1020"/>
+        </scene>
+        <!--Route SearchVC-->
+        <scene sceneID="rkz-wS-uKJ">
+            <objects>
+                <viewController storyboardIdentifier="RouteVC" extendedLayoutIncludesOpaqueBars="YES" id="vkJ-ul-WQH" customClass="RouteSearchVC" customModule="Trippng" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gKq-14-T9l"/>
+                        <viewControllerLayoutGuide type="bottom" id="Dsq-Pn-8ij"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="taX-6Z-U9o">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FNp-5p-k18">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="FNp-5p-k18" firstAttribute="top" secondItem="gKq-14-T9l" secondAttribute="bottom" constant="-64" id="HdZ-Ql-1pH"/>
+                            <constraint firstItem="FNp-5p-k18" firstAttribute="leading" secondItem="taX-6Z-U9o" secondAttribute="leadingMargin" constant="-20" id="Ie9-lQ-GNi"/>
+                            <constraint firstItem="Dsq-Pn-8ij" firstAttribute="top" secondItem="FNp-5p-k18" secondAttribute="bottom" id="ZZn-n2-hH9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="FNp-5p-k18" secondAttribute="trailing" constant="-20" id="ajs-pR-geZ"/>
+                        </constraints>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="FNp-5p-k18" id="24e-tL-SsB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ouC-AM-oKt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1868" y="1020"/>
         </scene>
         <!--Map Search TableVC-->
         <scene sceneID="v0Q-iV-rA0">
@@ -97,7 +127,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z9R-FD-KDx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1773" y="1020"/>
+            <point key="canvasLocation" x="1892" y="1814"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oBR-Je-vCq">
